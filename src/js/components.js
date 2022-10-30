@@ -1,3 +1,5 @@
+import { gameArr, gameSize, sec, min, step } from './index';
+
 function renderPage() {
   const gameBody = document.createElement('div');
   gameBody.className = 'wrapper-game';
@@ -66,7 +68,7 @@ function showWin() {
   overlay.innerHTML = `
   <div class="win" onclick="event.stopPropagation()">
     <div class="close">
-      <img class="modal-close" src="./assets/x_icon.png" alt="close">        
+      <img class="modal-close" src="../src/assets/x_icon.png" alt="close">        
     </div>
     Hooray! You solved the puzzle in ${showMin} : ${showSec} and ${step} moves!
   </div>`;
@@ -86,7 +88,7 @@ function showRecords() {
   overlay.innerHTML = `
   <div class="results" onclick="event.stopPropagation()">
     <div class="close">
-      <img class="modal-close" src="./assets/x_icon.png" alt="close">        
+      <img class="modal-close" src="../src/assets/x_icon.png" alt="close">        
     </div>
     <table class="table">
       <caption>Score table</caption>

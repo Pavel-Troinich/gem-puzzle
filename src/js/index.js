@@ -142,3 +142,5 @@ function checkWin() {
   }
   return;
 }
+
+export { gameArr, gameSize, solvedArr, sec, min, step, audioPlay, newGame, refreshGameField }

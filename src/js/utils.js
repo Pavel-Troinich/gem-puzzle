@@ -1,3 +1,5 @@
+import { gameArr, gameSize, solvedArr, sec, min, step, audioPlay, newGame, refreshGameField } from './index';
+
 function createRandomArr(size) {
   let arr1 = [];
   let arr2 = [];
@@ -14,10 +16,10 @@ function createRandomArr(size) {
     }    
   }
   
-  if ((gameSize % 2) !== 0 && (inversionCount % 2) !== 0 ) {
-    createRandomArr(gameSize);
-  } else if ((gameSize % 2) === 0 && (inversionCount % 2) !== 0 ) {
-    createRandomArr(gameSize);
+  if ((size % 2) !== 0 && (inversionCount % 2) !== 0 ) {
+    createRandomArr(size);
+  } else if ((size % 2) === 0 && (inversionCount % 2) !== 0 ) {
+    createRandomArr(size);
   } else {
     arr1.push(0);
     arr2.push(0);
@@ -73,7 +75,7 @@ function countStep() {
 }
 
 function playSound() {
-  const audio = new Audio('./assets/step.mp3');
+  const audio = new Audio('../src/assets/step.mp3');
   audio.autoplay = audioPlay;
   audio.loop = false;
 }
