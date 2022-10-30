@@ -1,0 +1,27 @@
+body {
+  background: #d6d6d6;
+  box-sizing: border-box;  
+  color: rgb(61, 61, 61);
+  font-size: 18px;
+ }
+
+ .wrapper-game {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #d6d6d6;
+  min-height: 100vh
+ }
+
+ .block-buttons {
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  flex-wrap: wrap;
+  gap: 3%;
+  background: #d6d6d6;
+ }
