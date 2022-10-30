@@ -1,5 +1,5 @@
 import { renderPage, showWin, showRecords, closeResults } from './components';
-import { createRandomArr, shuffle, showTime } from './utils';
+import { createRandomArr, shuffle, showTime, saveGame, loadGame, countStep, playSound, switchSound, changeGame } from './utils';
 
 let gameSize = 3;
 let audioPlay = true;
@@ -124,4 +124,21 @@ function refreshGameField() {
   gamefildBlock.innerHTML = htmlContent;
   positioningCells(gameSize);
   addListeners();
+}
+
+function checkWin() {
+  if (JSON.stringify(gameArr) === JSON.stringify(solvedArr)) {   
+    let showMin = (min < 10) ? ('0' + min) : min;
+    let showSec = (sec < 10) ? ('0' + sec) : sec; 
+    let recordsArr = JSON.parse(localStorage.getItem('records')) || [];
+    let result = {
+      size: `${gameSize} x ${gameSize}`,
+      time: `${showMin} : ${showSec}`,
+      step: `${step}`,
+    };
+    recordsArr.push(result);
+    localStorage.setItem('records', JSON.stringify(recordsArr));    
+    showWin();    
+  }
+  return;
 }

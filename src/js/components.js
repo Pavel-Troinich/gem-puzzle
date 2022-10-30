@@ -100,7 +100,7 @@ function showRecords() {
     for (let i = 0; i < resultArr.length; i++) {
       resultHtml += `<tr><td>${i + 1}</td><td>${resultArr[i].size}</td><td>${resultArr[i].time}</td><td>${resultArr[i].step}</td></tr>`
     }
-  } 
+  }
 
   let tableResults = document.querySelector('.table');
   tableResults.insertAdjacentHTML('beforeend', resultHtml);

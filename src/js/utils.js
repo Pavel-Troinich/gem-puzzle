@@ -65,4 +65,34 @@ function loadGame() {
   refreshGameField();
 }
 
-export { createRandomArr, shuffle, showTime, saveGame, loadGame };
+function countStep() {
+  step++;
+  const steps = document.querySelector('.moves');
+  steps.textContent = step;
+  playSound();
+}
+
+function playSound() {
+  const audio = new Audio('./assets/step.mp3');
+  audio.autoplay = audioPlay;
+  audio.loop = false;
+}
+
+function switchSound() {
+  if (audioPlay) {
+    audioPlay = false;
+    this.textContent = 'Sound On'
+  } else {
+    audioPlay = true;
+    this.textContent = 'Sound Off'
+  }
+}
+
+function changeGame() {
+  gameSize = +this.value;
+  newGame();
+  this.checked = true;
+}
+
+
+export { createRandomArr, shuffle, showTime, saveGame, loadGame, countStep, playSound, switchSound, changeGame };
