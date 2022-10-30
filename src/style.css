@@ -3,9 +3,9 @@ body {
   box-sizing: border-box;  
   color: rgb(61, 61, 61);
   font-size: 18px;
- }
+}
 
- .wrapper-game {
+.wrapper-game {
   max-width: 500px;
   margin: 0 auto;
   display: flex;
@@ -17,7 +17,7 @@ body {
   min-height: 100vh
  }
 
- .block-buttons {
+.block-buttons {
   width: 100%;
   display: flex;
   justify-content:center;
@@ -26,9 +26,31 @@ body {
   background: #d6d6d6;
  }
 
+button {
+  margin-top: 10px;
+  width: 88px;
+  height: 30px;
+  background: #dcf06f;
+  border: 2px solid #8ec030;
+  border-radius: 3px;
+  cursor: pointer;
+  color: rgb(61, 61, 61);
+  font-size: 0.95rem;
+}
 
+button:active {
+  transform: scale(0.95);
+}
 
- .block-gamefild {
+.block-info {
+  display: flex;
+  justify-content: center;
+  gap: 5%;
+  background-color: #d6d6d6;
+  width: 100%
+}
+
+.block-gamefild {
   position: relative;
   box-sizing: content-box;
   display: flex;
@@ -40,9 +62,9 @@ body {
   background-color: #b8fce7;
   border: 3px solid rgb(139, 137, 137);
   border-radius: 5px
- }
+}
 
- .cell {
+.cell {
   position: absolute;
   left: 0;
   top: 0;
@@ -57,12 +79,73 @@ body {
   font-size: 1.5rem;
   background-color: #dcf06f;
   transition: all .1s
- }
+}
 
- .block-changegame {
+.block-changegame {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 3%;
   width: 100%;
- }
+}
+
+label {
+  margin-top: 10px;
+  width: 60px;
+  height: 25px;
+  background: #dcf06f;
+  border: 2px solid #8ec030;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 5px;
+}
+
+label:active {
+  transform: scale(0.95);
+}
+
+.radio {
+  display: none;
+}
+
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 150vh;
+  background: rgba(41, 41, 41, 0.6);
+  z-index: 2;     
+}
+
+.results,
+.win {
+  margin: 150px auto;
+  background: rgb(232, 252, 184);
+  position: relative;
+  max-width: 640px;
+  min-width: 320px;
+  z-index: 5;
+  border-radius: 5px;
+}
+
+.close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+
+.table {  
+  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;  
+}
+
+.win {  
+  height: 120px;
+  padding: 50px 10px 10px;
+  text-align: center;
+  font-size: 1.5rem;
+}
