@@ -48,3 +48,80 @@ function addListeners() {
   const gameSizes = document.querySelectorAll('.radio');
   gameSizes.forEach(item => item.addEventListener('click', changeGame));
 }
+
+function positioningCells(size) {
+  const cells = document.querySelectorAll('.cell');  
+  let numCell = 0;
+  let row = 0;
+  for (let i = 0; i < cells.length; i += size) {    
+    for (let j = 0; j < size; j++) {
+      if (numCell <= size**2 - 1) {
+        cells[numCell].style.transform = `translate(${0 + j*100}%, ${0 + row*100}%)`;
+        cells[numCell].style.width = `${100/size}%`;
+        cells[numCell].style.height = `${100/size}%`;
+        numCell++;
+      }
+    }
+    row++;
+  }
+}
+
+function getCellPosition(cell) {
+  let stringPosition = cell.style.transform;
+  let res = [];
+  stringPosition.slice(10, stringPosition.length - 1)
+    .split(', ')
+    .forEach(el => res.push(el.slice(0, el.length - 1)));
+  return res;
+}
+
+function moveCell(e) {
+  const cells = document.querySelectorAll('.cell');
+  let contentCell = +e.target.innerHTML;
+  let indexCell;
+  
+  for (let i = 0; i < gameArr.length; i++) {
+    if (gameArr[i] === contentCell) indexCell = i;    
+  }
+  
+  let position = getCellPosition(cells[indexCell]);
+  let x = +position[0];
+  let y = +position[1];  
+
+  if (gameArr[indexCell + gameSize] === 0) {
+    cells[indexCell].style.transform = `translate(${x}%, ${y + 100}%)`;
+    gameArr[indexCell + gameSize] = gameArr[indexCell];
+    gameArr[indexCell] = 0;
+    countStep();    
+  } else if (gameArr[indexCell - gameSize] === 0) {
+    cells[indexCell].style.transform = `translate(${x}%, ${y - 100}%)`;
+    gameArr[indexCell - gameSize] = gameArr[indexCell];
+    gameArr[indexCell] = 0;
+    countStep();    
+  } else if (gameArr[indexCell + 1] === 0 && (indexCell + 1) % gameSize !== 0) {
+    cells[indexCell].style.transform = `translate(${x + 100}%, ${y}%)`;
+    gameArr[indexCell + 1] = gameArr[indexCell];
+    gameArr[indexCell] = 0;
+    countStep();    
+  } else if (gameArr[indexCell - 1] === 0 && indexCell % gameSize !== 0) {
+    cells[indexCell].style.transform = `translate(${x - 100}%, ${y}%)`;
+    gameArr[indexCell - 1] = gameArr[indexCell];
+    gameArr[indexCell] = 0; 
+    countStep();      
+  }
+  setTimeout(refreshGameField, 100);
+  checkWin(); 
+}
+
+function refreshGameField() {
+  const gamefildBlock = document.querySelector('.block-gamefild');
+  let htmlContent = '';
+  for (let i = 0; i < gameArr.length; i++) {
+    if (gameArr[i] !== 0) {
+      htmlContent += `<div class="cell" draggable="true">${gameArr[i]}</div>`;
+    } else htmlContent += `<div class="cell empty" style="display: none">${gameArr[i]}</div>`;
+  }
+  gamefildBlock.innerHTML = htmlContent;
+  positioningCells(gameSize);
+  addListeners();
+}

@@ -25,3 +25,44 @@ body {
   gap: 3%;
   background: #d6d6d6;
  }
+
+
+
+ .block-gamefild {
+  position: relative;
+  box-sizing: content-box;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  background-color: #b8fce7;
+  border: 3px solid rgb(139, 137, 137);
+  border-radius: 5px
+ }
+
+ .cell {
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  color: rgb(189, 135, 0);
+  border: 2px solid #8ec030;
+  border-radius: 6px;
+  font-size: 1.5rem;
+  background-color: #dcf06f;
+  transition: all .1s
+ }
+
+ .block-changegame {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 3%;
+  width: 100%;
+ }

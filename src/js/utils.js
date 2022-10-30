@@ -44,6 +44,25 @@ function showTime() {
   setTimeout(showTime, 1000);
 }
 
+function saveGame() {
+  localStorage.setItem('savedArr', gameArr);
+  localStorage.setItem('savedStep', step);
+  localStorage.setItem('savedSec', sec);
+  localStorage.setItem('savedMin', min);
+  localStorage.setItem('savedSize', gameSize);  
+}
 
+function loadGame() {
+  let tempArr = [];
+  localStorage.getItem('savedArr').split(',').forEach((el) => tempArr.push(+el));
+  gameArr = tempArr;
+  sec = +localStorage.getItem('savedSec');
+  min = +localStorage.getItem('savedMin');
+  step = +localStorage.getItem('savedStep');
+  gameSize = +localStorage.getItem('savedSize');
+  const steps = document.querySelector('.moves');
+  steps.textContent = step;
+  refreshGameField();
+}
 
-export { createRandomArr, shuffle, showTime };
+export { createRandomArr, shuffle, showTime, saveGame, loadGame };
