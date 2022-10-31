@@ -1,4 +1,4 @@
-import { gameArr, gameSize, solvedArr, sec, min, step, audioPlay, newGame, refreshGameField } from './index';
+import { gameArr, gameSize, solvedArr, sec, min, step, audioPlay, fonAudio, newGame, refreshGameField } from './index';
 import { showModal } from './components';
 
 function createRandomArr(size) {
@@ -79,19 +79,23 @@ function countStep() {
   steps.textContent = step;  
 }
 
-function playSound() {
-  const audio = new Audio("./src/assets/step.mp3");
+function playSound(setAudio) {
+  const audio = new Audio(setAudio.path);
   audio.autoplay = audioPlay;
-  audio.loop = false;
+  audio.loop = setAudio.loop;
 }
 
 function switchSound() {
   if (audioPlay) {
     audioPlay = false;
-    this.textContent = 'Sound On'
+    this.textContent = 'Sound Off';
+    this.style.borderColor = "red";
+    fonAudio.pause();
   } else {
     audioPlay = true;
     this.textContent = 'Sound Off'
+    this.style.borderColor = "#8ec030";
+    fonAudio.play();
   }
 }
 
@@ -100,6 +104,5 @@ function changeGame() {
   newGame();
   this.checked = true;
 }
-
 
 export { createRandomArr, shuffle, showTime, saveGame, loadGame, countStep, playSound, switchSound, changeGame };

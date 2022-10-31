@@ -1,4 +1,4 @@
-import { gameArr, gameSize, sec, min, step } from './index';
+import { gameArr, sec, min, step } from './index';
 
 function renderPage() {
   const gameBody = document.createElement('div');

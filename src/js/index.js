@@ -1,13 +1,24 @@
-import { renderPage, showWin, showRecords, closeResults } from './components';
-import { createRandomArr, shuffle, showTime, saveGame, loadGame, countStep, playSound, switchSound, changeGame } from './utils';
+import { renderPage, showWin, showRecords, } from './components';
+import { createRandomArr, showTime, saveGame, loadGame, countStep, playSound, switchSound, changeGame } from './utils';
 
 let gameSize = 3;
-let audioPlay = true;
 let solvedArr = [];
 let gameArr = [];
 let step = 0;
 let min = 0;
 let sec = 0;
+let audioPlay = true;
+let stepAudio = {
+  path: "./src/assets/step.mp3",
+  loop: false
+};
+let winAudio = {
+  path: "./src/assets/win.mp3",
+  loop: false
+};
+const fonAudio = new Audio("./src/assets/fon.mp3");
+fonAudio.autoplay = audioPlay;
+fonAudio.loop = true;
 
 createRandomArr(gameSize);
 renderPage();
@@ -93,25 +104,25 @@ function moveCell(e) {
     gameArr[indexCell + gameSize] = gameArr[indexCell];
     gameArr[indexCell] = 0;
     countStep();
-    playSound();
+    playSound(stepAudio);
   } else if (gameArr[indexCell - gameSize] === 0) {
     cells[indexCell].style.transform = `translate(${x}%, ${y - 100}%)`;
     gameArr[indexCell - gameSize] = gameArr[indexCell];
     gameArr[indexCell] = 0;
     countStep();
-    playSound();
+    playSound(stepAudio);
   } else if (gameArr[indexCell + 1] === 0 && (indexCell + 1) % gameSize !== 0) {
     cells[indexCell].style.transform = `translate(${x + 100}%, ${y}%)`;
     gameArr[indexCell + 1] = gameArr[indexCell];
     gameArr[indexCell] = 0;
     countStep();
-    playSound();
+    playSound(stepAudio);
   } else if (gameArr[indexCell - 1] === 0 && indexCell % gameSize !== 0) {
     cells[indexCell].style.transform = `translate(${x - 100}%, ${y}%)`;
     gameArr[indexCell - 1] = gameArr[indexCell];
     gameArr[indexCell] = 0; 
     countStep();
-    playSound();
+    playSound(stepAudio);
   }
   setTimeout(refreshGameField, 100);
   checkWin(); 
@@ -142,9 +153,10 @@ function checkWin() {
     };
     recordsArr.push(result);
     localStorage.setItem('records', JSON.stringify(recordsArr));    
-    showWin();    
+    showWin();
+    playSound(winAudio);
   }
   return;
 }
 
-export { gameArr, gameSize, solvedArr, sec, min, step, audioPlay, newGame, refreshGameField }
+export { gameArr, gameSize, solvedArr, sec, min, step, audioPlay, fonAudio, newGame, refreshGameField }
