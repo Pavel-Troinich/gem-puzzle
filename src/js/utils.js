@@ -1,4 +1,5 @@
 import { gameArr, gameSize, solvedArr, sec, min, step, audioPlay, newGame, refreshGameField } from './index';
+import { showModal } from './components';
 
 function createRandomArr(size) {
   let arr1 = [];
@@ -55,27 +56,31 @@ function saveGame() {
 }
 
 function loadGame() {
-  let tempArr = [];
-  localStorage.getItem('savedArr').split(',').forEach((el) => tempArr.push(+el));
-  gameArr = tempArr;
-  sec = +localStorage.getItem('savedSec');
-  min = +localStorage.getItem('savedMin');
-  step = +localStorage.getItem('savedStep');
-  gameSize = +localStorage.getItem('savedSize');
-  const steps = document.querySelector('.moves');
-  steps.textContent = step;
-  refreshGameField();
+  if (localStorage.getItem('savedArr')) {
+    let tempArr = [];
+    localStorage.getItem('savedArr').split(',').forEach((el) => tempArr.push(+el));
+    gameArr = tempArr;
+    sec = +localStorage.getItem('savedSec');
+    min = +localStorage.getItem('savedMin');
+    step = +localStorage.getItem('savedStep');
+    gameSize = +localStorage.getItem('savedSize');
+    const steps = document.querySelector('.moves');
+    steps.textContent = step;
+    refreshGameField();
+  } else {
+    let message = 'No saved game!';
+    showModal(message);
+  }
 }
 
 function countStep() {
   step++;
   const steps = document.querySelector('.moves');
-  steps.textContent = step;
-  playSound();
+  steps.textContent = step;  
 }
 
 function playSound() {
-  const audio = new Audio('../src/assets/step.mp3');
+  const audio = new Audio("./src/assets/step.mp3");
   audio.autoplay = audioPlay;
   audio.loop = false;
 }

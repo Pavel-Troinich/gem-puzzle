@@ -92,22 +92,26 @@ function moveCell(e) {
     cells[indexCell].style.transform = `translate(${x}%, ${y + 100}%)`;
     gameArr[indexCell + gameSize] = gameArr[indexCell];
     gameArr[indexCell] = 0;
-    countStep();    
+    countStep();
+    playSound();
   } else if (gameArr[indexCell - gameSize] === 0) {
     cells[indexCell].style.transform = `translate(${x}%, ${y - 100}%)`;
     gameArr[indexCell - gameSize] = gameArr[indexCell];
     gameArr[indexCell] = 0;
-    countStep();    
+    countStep();
+    playSound();
   } else if (gameArr[indexCell + 1] === 0 && (indexCell + 1) % gameSize !== 0) {
     cells[indexCell].style.transform = `translate(${x + 100}%, ${y}%)`;
     gameArr[indexCell + 1] = gameArr[indexCell];
     gameArr[indexCell] = 0;
-    countStep();    
+    countStep();
+    playSound();
   } else if (gameArr[indexCell - 1] === 0 && indexCell % gameSize !== 0) {
     cells[indexCell].style.transform = `translate(${x - 100}%, ${y}%)`;
     gameArr[indexCell - 1] = gameArr[indexCell];
     gameArr[indexCell] = 0; 
-    countStep();      
+    countStep();
+    playSound();
   }
   setTimeout(refreshGameField, 100);
   checkWin(); 

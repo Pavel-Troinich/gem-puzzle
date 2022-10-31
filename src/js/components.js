@@ -60,17 +60,15 @@ function renderPage() {
   return gameBody;
 }
 
-function showWin() {
-  let showMin = (min < 10) ? ('0' + min) : min;
-  let showSec = (sec < 10) ? ('0' + sec) : sec;
+function showModal(content) {  
   let overlay = document.createElement('div');
   overlay.className = "overlay";
   overlay.innerHTML = `
   <div class="win" onclick="event.stopPropagation()">
     <div class="close">
-      <img class="modal-close" src="../src/assets/x_icon.png" alt="close">        
+      <img class="modal-close" src="./src/assets/x_icon.png" alt="close">        
     </div>
-    Hooray! You solved the puzzle in ${showMin} : ${showSec} and ${step} moves!
+    ${content}
   </div>`;
 
   document.body.append(overlay);
@@ -79,36 +77,30 @@ function showWin() {
   closeIcon.addEventListener('click', closeResults);
 }
 
+function showWin() {
+  let showMin = (min < 10) ? ('0' + min) : min;
+  let showSec = (sec < 10) ? ('0' + sec) : sec;
+  let message = `Hooray! You solved the puzzle in ${showMin} : ${showSec} and ${step} moves!`;
+
+  showModal(message);
+}
+
 function showRecords() {
   let resultArr = JSON.parse(localStorage.getItem('records'));
   let resultHtml = '';
-  
-  let overlay = document.createElement('div');
-  overlay.className = "overlay";
-  overlay.innerHTML = `
-  <div class="results" onclick="event.stopPropagation()">
-    <div class="close">
-      <img class="modal-close" src="../src/assets/x_icon.png" alt="close">        
-    </div>
-    <table class="table">
-      <caption>Score table</caption>
-      <tr><th>№</th><th>Size</th><th>Time</th><th>Moves</th></tr>     
-    </table>
-  </div>`;
-
-  document.body.append(overlay);
-
   if (resultArr) {
     for (let i = 0; i < resultArr.length; i++) {
       resultHtml += `<tr><td>${i + 1}</td><td>${resultArr[i].size}</td><td>${resultArr[i].time}</td><td>${resultArr[i].step}</td></tr>`
     }
   }
-
-  let tableResults = document.querySelector('.table');
-  tableResults.insertAdjacentHTML('beforeend', resultHtml);
-  let closeIcon = document.querySelector('.close');
-  overlay.addEventListener('click', closeResults);
-  closeIcon.addEventListener('click', closeResults);
+  let tableResults = `
+    <table class="table">
+    <caption>Score table</caption>
+    <tr><th>№</th><th>Size</th><th>Time</th><th>Moves</th></tr>
+    ${resultHtml}
+    </table>`;
+  
+  showModal(tableResults);
 }
 
 function closeResults() {
@@ -116,4 +108,4 @@ function closeResults() {
   overlay.remove();  
 }
 
-export { renderPage, showWin, showRecords, closeResults };
+export { renderPage, showWin, showRecords, closeResults, showModal };
